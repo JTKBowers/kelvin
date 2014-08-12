@@ -12,4 +12,4 @@ payload = {'temperature': temp, 'pressure': pressure}
 
 server_url = 'http://zephos.duckdns.org:5000/temperature_pressure'
 r = requests.post(server_url, data=json.dumps(payload))
-print(r.code)
+print(r.status_code)
