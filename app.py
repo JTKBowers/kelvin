@@ -15,7 +15,7 @@ def temperature_data():
 @app.route('/temperature_pressure', method='GET')
 def temperature_data():
     #return bottle.template('<html><body>Hello World!</body></html>')
-    return template('<html><body> Latest temperature is: {{temp}} </body></html>', temp=_temp)
+    return bottle.template('<html><body> Latest temperature is: {{temp}} </body></html>', temp=_temp)
 
 #debug stuff
 if __name__ == '__main__':
