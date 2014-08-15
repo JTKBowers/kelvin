@@ -8,9 +8,9 @@ temp = 0
 def index():
     data = json.loads(request.body)
     temp = data["temperature"]
-    for l in request.body:
+    for l in bottle.request.body:
         print (l)
-    print (request.body.readlines())
+    print (bottle.request.body.readlines())
 
 @app.route('/temperature_pressure', method='GET')
 def index():
