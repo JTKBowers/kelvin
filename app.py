@@ -6,11 +6,11 @@ app = application = bottle.Bottle()
 _temp = 0
 @app.route('/temperature_pressure', method='POST')
 def temperature_data():
-    data = json.loads(bottle.request.body)
-    _temp = data["temperature"]
     for l in bottle.request.body:
         print (l)
-    print (bottle.request.body.readlines())
+    print (bottle.request.body)
+    data = json.loads(bottle.request.body)
+    _temp = data["temperature"]
 
 @app.route('/temperature_pressure', method='GET')
 def temperature_data():
