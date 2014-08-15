@@ -6,8 +6,8 @@ app = application = bottle.Bottle()
 plugin = bottle.ext.sqlite.Plugin(dbfile='sensor_data.db')
 app.install(plugin)
 
-@app.route('/temperature_pressure', db, method='POST')
-def temperature_data():
+@app.route('/temperature_pressure', method='POST')
+def temperature_data(db):
     for l in bottle.request.body:
         print (l)
     print (bottle.request.json)
@@ -21,7 +21,7 @@ def temperature_data():
     pressure = data["pressure"]
     c.execute("INSERT INTO pressure VALUES ('2006-01-05',?)", (pressure,))
 
-@app.route('/temperature', db, method='GET')
+@app.route('/temperature', method='GET')
 def temperature_data(db):
     #return bottle.template('<html><body>Hello World!</body></html>')
     temp = db.execute('SELECT * from temperature').fetchone()
