@@ -9,7 +9,7 @@ def temperature_data():
     for l in bottle.request.body:
         print (l)
     print (bottle.request.body)
-    data = json.loads(bottle.request.body)
+    data = json.loads(str(bottle.request.body))
     _temp = data["temperature"]
 
 @app.route('/temperature_pressure', method='GET')
