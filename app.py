@@ -27,7 +27,7 @@ def temperature_data(db):
     temp = db.execute('SELECT * from temperature').fetchone()
     if temp:
         return bottle.template('<html><body> Latest temperature is: {{temp}} </body></html>', temp=temp)
-    return HTTPError(404, "Page not found")
+    return bottle.HTTPError(404, "Page not found")
 
 #debug stuff
 if __name__ == '__main__':
