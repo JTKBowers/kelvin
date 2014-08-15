@@ -12,7 +12,7 @@ def temperature_data():
         print (l)
     print (bottle.request.body.readlines())
 
-@app.route('/temperature_pressure', method='POST')
+@app.route('/temperature_pressure', method='GET')
 def temperature_data():
     #return bottle.template('<html><body>Hello World!</body></html>')
     return template('<html><body> Latest temperature is: {{temp}} </body></html>', temp=_temp)
