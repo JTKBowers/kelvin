@@ -4,9 +4,11 @@ app = application = bottle.Bottle()
 
 @app.route('/temperature_pressure', method='POST')
 def index():
-    for l in request.body:
+    data = json.loads(request.body)
+    temp = data["temperature"]
+    for l in bottle.request.body:
         print (l)
-    print (request.body.readlines())
+    print (bottle.request.body.readlines())
 
 @app.route('/lol')
 def index():
