@@ -28,8 +28,9 @@ def temperature_data(db):
 @app.route('/temperature', method='GET')
 def temperature_data(db):
     #return bottle.template('<html><body>Hello World!</body></html>')
-    temp = db.execute('SELECT * from temperature').fetchone()
-    if temp:
+    row = db.execute('SELECT * from temperature').fetchone()
+    if row:
+        temp = row(1)
         return bottle.template('<html><body> Latest temperature is: {{temp}} </body></html>', temp=temp)
     return bottle.HTTPError(404, "Page not found")
 
