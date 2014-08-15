@@ -8,7 +8,7 @@ def index():
         print (l)
     print (request.body.readlines())
 
-@app.route('/')
+@app.route('/lol')
 def index():
     #return bottle.template('<html><body>Hello World!</body></html>')
     return '<html><body>Hello World2!</body></html>'
