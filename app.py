@@ -28,7 +28,7 @@ def temperature_data(db):
 @app.route('/temperature', method='GET')
 def temperature_data(db):
     #return bottle.template('<html><body>Hello World!</body></html>')
-    row = db.execute('SELECT * from temperature').fetchone()
+    row = db.execute('SELECT * from temperature ORDER BY date DESC LIMIT 1').fetchone()
     if row:
         temp = row[1]
         return bottle.template('<html><body> Latest temperature is: {{temp}} </body></html>', temp=temp)
