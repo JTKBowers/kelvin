@@ -1,4 +1,5 @@
 import bottle
+import bottle.ext.sqlite
 import json
 
 app = application = bottle.Bottle()
