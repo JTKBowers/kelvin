@@ -15,11 +15,15 @@ def temperature_data(db):
 
 
     temp = data["temperature"]
+
+    c = db.cursor()
     
     c.execute("INSERT INTO temperature VALUES ('2006-01-05',?)", (temp,))
 
     pressure = data["pressure"]
     c.execute("INSERT INTO pressure VALUES ('2006-01-05',?)", (pressure,))
+
+    db.commit()
 
 @app.route('/temperature', method='GET')
 def temperature_data(db):
