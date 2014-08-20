@@ -36,6 +36,15 @@ def temperature_data(db):
         return bottle.template('<html><body> Latest temperature is: {{temp}} </body></html>', temp=temp)
     return bottle.HTTPError(404, "Page not found")
 
+@app.route('/pressure', method='GET')
+def temperature_data(db):
+    #return bottle.template('<html><body>Hello World!</body></html>')
+    row = db.execute('SELECT * from pressure ORDER BY date DESC LIMIT 1').fetchone()
+    if row:
+        pressure = row[1]
+        return bottle.template('<html><body> Latest pressure is: {{pressure}} </body></html>', pressure=pressure)
+    return bottle.HTTPError(404, "Page not found")
+
 #debug stuff
 if __name__ == '__main__':
     bottle.run(app=application, host='0.0.0.0', port=5000)
