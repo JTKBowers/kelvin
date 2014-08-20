@@ -13,7 +13,7 @@ pressure = bmp.readPressure()
 payload = {'temperature': temp, 'pressure': pressure}
 
 print ('POSTing data...')
-server_url = 'http://zephos.duckdns.org:5000/temperature_pressure'
+server_url = 'http://zephos.duckdns.org/temperature_pressure'
 headers = {'content-type': 'application/json'}
 r = requests.post(server_url, data=json.dumps(payload), headers=headers)
 print(r.status_code)
