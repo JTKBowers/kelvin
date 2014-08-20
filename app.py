@@ -2,9 +2,12 @@ import bottle
 import bottle.ext.sqlite
 import json
 import time
+import os
+
+databse_abs_path = os.path.abspath("sensor_data.db")
 
 app = application = bottle.Bottle()
-plugin = bottle.ext.sqlite.Plugin(dbfile='sensor_data.db')
+plugin = bottle.ext.sqlite.Plugin(dbfile=databse_abs_path)
 app.install(plugin)
 
 @app.route('/temperature_pressure', method='POST')
