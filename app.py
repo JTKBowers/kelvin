@@ -2,27 +2,19 @@ import bottle
 import bottle.ext.sqlite
 import json
 import time
-import os
-
-databse_abs_path = os.path.abspath("sensor_data.db")
 
 app = application = bottle.Bottle()
-plugin = bottle.ext.sqlite.Plugin(dbfile=databse_abs_path)
+plugin = bottle.ext.sqlite.Plugin(dbfile='sensor_data.db')
 app.install(plugin)
 
 @app.route('/temperature_pressure', method='POST')
 def temperature_data(db):
-    for l in bottle.request.body:
-        print (l)
-    print (bottle.request.json)
     data = bottle.request.json
-
-
-    temp = data["temperature"]
-
+    epoch_time = time.time()
+    
     c = db.cursor()
     
-    epoch_time = time.time()
+    temp = data["temperature"]
     c.execute("INSERT INTO temperature VALUES (?,?)", (epoch_time, temp,))
 
     pressure = data["pressure"]
