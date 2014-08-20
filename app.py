@@ -27,10 +27,18 @@ def temperature_data(db):
 
     db.commit()
 
+@app.route('/temperature.json', method='GET')
+def temperature_data(db):
+    data = []
+    for row in db.execute('SELECT * from temperature ORDER BY date DESC LIMIT 96'): #at 15 minutes between sample, the past 24 hours is 24*4 = 96 points
+        item = {"timestamp":row[0], "temperature":row[1]}
+        data.append(item)
+    return json.dumps(data)
+
 @app.route('/temperature', method='GET')
 def temperature_data(db):
     #return bottle.template('<html><body>Hello World!</body></html>')
-    row = db.execute('SELECT * from temperature ORDER BY date DESC LIMIT 1').fetchone()
+    row = db.execute('SELECT * from temperature ORDER BY date DESC LIMIT 96').fetchone()
     if row:
         temp = row[1]
         return bottle.template('<html><body> Latest temperature is: {{temp}} </body></html>', temp=temp)
