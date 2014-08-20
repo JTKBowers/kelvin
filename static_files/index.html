@@ -9,11 +9,16 @@
 
     <script>
         $.getJSON( "temperature.json", function( data ) {
+            //The items which will be passed to the graph
             var items = [];
+
+            //for converting to local time:
+            var d = new Date()
+            var seconds_offset = 60.0*d.getTimezoneOffset();
 
             for (var i in data){
                 items.push(
-                    {x:data[i].timestamp, y: data[i].temperature
+                    {x:data[i].timestamp+seconds_offset, y: data[i].temperature
                 });
             };
 
