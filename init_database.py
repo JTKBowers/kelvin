@@ -5,10 +5,10 @@ c = conn.cursor()
 
 # Create table
 c.execute('''CREATE TABLE temperature
-             (date text, temperature real)''')
+             (date real, temperature real)''')
 
 c.execute('''CREATE TABLE pressure
-             (date text, pressure real)''')
+             (date real, pressure real)''')
 
 conn.commit()
 

@@ -1,8 +1,9 @@
 import bottle
 import bottle.ext.sqlite
 import json
+import time
 
-app = application = bottle.Bottle()
+ = application = bottle.Bottle()
 plugin = bottle.ext.sqlite.Plugin(dbfile='sensor_data.db')
 app.install(plugin)
 
@@ -18,10 +19,11 @@ def temperature_data(db):
 
     c = db.cursor()
     
-    c.execute("INSERT INTO temperature VALUES ('2006-01-05',?)", (temp,))
+    epoch_time = time.time()
+    c.execute("INSERT INTO temperature VALUES (?,?)", (epoch_time, temp,))
 
     pressure = data["pressure"]
-    c.execute("INSERT INTO pressure VALUES ('2006-01-05',?)", (pressure,))
+    c.execute("INSERT INTO pressure VALUES (?,?)", (epoch_time, pressure,))
 
     db.commit()
 
