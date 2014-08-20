@@ -4,34 +4,52 @@
 <!-- <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
 <script src="static_files/d3.v3.min.js" charset="utf-8"></script>
 <script src="static_files/rickshaw.min.js"></script>
+<script src="static_files/jquery-1.11.1.min.js"></script>
 <link type="text/css" rel="stylesheet" href="static_files/rickshaw.min.css">
+
 <div id="chart"></div>
 
 <script>
 
-var data = [ { x: -1893456000, y: 92228531 }, { x: -1577923200, y: 106021568 }, { x: -1262304000, y: 123202660 }, { x: -946771200, y: 132165129 }, { x: -631152000, y: 151325798 }, { x: -315619200, y: 179323175 }, { x: 0, y: 203211926 }, { x: 315532800, y: 226545805 }, { x: 631152000, y: 248709873 }, { x: 946684800, y: 281421906 }, { x: 1408502406, y: 308745538 } ];
+/*var data = [ { x: -1893456000, y: 92228531 }, { x: -1577923200, y: 106021568 }, { x: -1262304000, y: 123202660 }, { x: -946771200, y: 132165129 }, { x: -631152000, y: 151325798 }, { x: -315619200, y: 179323175 }, { x: 0, y: 203211926 }, { x: 315532800, y: 226545805 }, { x: 631152000, y: 248709873 }, { x: 946684800, y: 281421906 }, { x: 1408502406, y: 308745538 } ];
+*/
 
-var graph = new Rickshaw.Graph( {
-    element: document.querySelector("#chart"),
-    width: 640,
-    height: 480,
-    renderer: 'line',
-    series: [ {
-        data: data,
-        color: '#4682b4'
-    } ]
-} );
 
-var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-    graph: graph
-} );
+$.getJSON( "temperature.json", function( data ) {
+    var items = [];
 
-var axes = new Rickshaw.Graph.Axis.Time( {
-    graph: graph
-} );
+    for (var i in data){
+        items.push(
+            {x:data[i].timestamp, y: data[i].temperature
+        });
+    };
 
-graph.render();
+    var graph = new Rickshaw.Graph( {
+        element: document.querySelector("#chart"),
+        width: 640,
+        height: 480,
+        renderer: 'line',
+        series: [ {
+            data: items,
+            name: 'Temperature',
+            color: '#4682b4'
+        } ]
+    } );
+    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graph
+    } );
+
+    var axes = new Rickshaw.Graph.Axis.Time( {
+        graph: graph
+    } );
+
+    graph.render();
+});
+
 
 </script>
 </head>
+<body>
+
+</body>
 </html>
