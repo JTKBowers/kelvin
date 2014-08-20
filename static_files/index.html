@@ -1,28 +1,37 @@
+<!doctype html>
 <html>
 <head>
-    <script src="static_files/Chart.min.js"></script>
+<!-- <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
+<script src="d3.v3.min.js" charset="utf-8"></script>
+<script src="rickshaw.min.js"></script>
+<link type="text/css" rel="stylesheet" href="rickshaw.min.css">
+<div id="chart"></div>
+
+<script>
+
+var data = [ { x: -1893456000, y: 92228531 }, { x: -1577923200, y: 106021568 }, { x: -1262304000, y: 123202660 }, { x: -946771200, y: 132165129 }, { x: -631152000, y: 151325798 }, { x: -315619200, y: 179323175 }, { x: 0, y: 203211926 }, { x: 315532800, y: 226545805 }, { x: 631152000, y: 248709873 }, { x: 946684800, y: 281421906 }, { x: 1408502406, y: 308745538 } ];
+
+var graph = new Rickshaw.Graph( {
+    element: document.querySelector("#chart"),
+    width: 640,
+    height: 480,
+    renderer: 'line',
+    series: [ {
+        data: data,
+        color: '#4682b4'
+    } ]
+} );
+
+var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+    graph: graph
+} );
+
+var axes = new Rickshaw.Graph.Axis.Time( {
+    graph: graph
+} );
+
+graph.render();
+
+</script>
 </head>
-<body>
-    <canvas id="myChart" width="400" height="400"></canvas>
-    <script type="text/javascript">
-        // Get the context of the canvas element we want to select
-        var ctx = document.getElementById("myChart").getContext("2d");
-        var data = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "Temperature",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                },
-            ]
-        };
-        var myLineChart = new Chart(ctx).Line(data);
-    </script>
-</body>
 </html>
