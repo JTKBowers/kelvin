@@ -3,7 +3,7 @@ import bottle.ext.sqlite
 import json
 import time
 
- = application = bottle.Bottle()
+app = application = bottle.Bottle()
 plugin = bottle.ext.sqlite.Plugin(dbfile='sensor_data.db')
 app.install(plugin)
 
