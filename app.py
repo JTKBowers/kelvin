@@ -24,8 +24,13 @@ def temperature_data(db):
 
 @app.route('/temperature.json', method='GET')
 def temperature_data(db):
+    try:
+        limit = int(bottle.request.query.get('limit', 96))
+    except ValueError:
+        limit = 96
+
     data = []
-    for row in db.execute('SELECT * from temperature ORDER BY date DESC LIMIT 96'): #at 15 minutes between sample, the past 24 hours is 24*4 = 96 points
+    for row in db.execute('SELECT * from temperature ORDER BY date DESC LIMIT ?', (limit,)): #at 15 minutes between sample, the past 24 hours is 24*4 = 96 points
         item = {"timestamp":row[0], "temperature":row[1]}
         data.append(item)
     return json.dumps(data)
