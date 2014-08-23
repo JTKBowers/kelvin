@@ -9,6 +9,7 @@
 
     <script>
         $.getJSON( "temperature.json", function( data ) {
+            var tv = 900000; //15 minutes
             //The items which will be passed to the graph
             var items = [];
 
@@ -29,11 +30,16 @@
                 height: 480,
                 renderer: 'line',
                 max: 25.0,
-                series: [ {
+                /*series: [ {
                     data: items,
                     name: 'Temperature',
                     color: '#4682b4'
-                } ]
+                } ]*/
+                series: new Rickshaw.Series.FixedDuration([{ name: 'one' }], undefined, {
+                    timeInterval: tv,
+                    maxDataPoints: 96,
+                    //timeBase: new Date().getTime() / 1000
+                }) 
             } );
             var hoverDetail = new Rickshaw.Graph.HoverDetail( {
                 graph: graph
@@ -56,7 +62,7 @@
                         graph.series.addData(item);
                         graph.render();
                     });
-                }, 900000);
+                }, tv);
 
         });
     </script>
