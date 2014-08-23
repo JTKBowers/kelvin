@@ -53,7 +53,7 @@
                 function(){
                     $.getJSON( "temperature.json?limit=1", function( data ) {
                         var item = {x:data[0].timestamp+seconds_offset, y: data[0].temperature};
-                        chart.series.addData(item);
+                        graph.series.addData(item);
                         graph.render();
                     });
                 }, 900000);
