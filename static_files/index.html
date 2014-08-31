@@ -17,33 +17,26 @@
             var d = new Date()
             var seconds_offset = 60.0*d.getTimezoneOffset();
 
-            /*for (var i in data){
+            for (var i in data){
                 items.push(
                     {x:data[i].timestamp+seconds_offset, y: data[i].temperature
                 });
             };
 
-            items.reverse();*/
+            items.reverse();
             var graph = new Rickshaw.Graph( {
                 element: document.querySelector("#chart"),
                 width: 640,
                 height: 480,
                 renderer: 'line',
                 max: 25.0,
-                /*series: [ {
+                series: [ {
                     data: items,
                     name: 'Temperature',
                     color: '#4682b4'
-                } ]*/
-                series: new Rickshaw.Series.FixedDuration([{ name: 'y' }], undefined, {
-                    timeInterval: tv,
-                    maxDataPoints: 96,
-                    timeBase: new Date().getTime() / 1000
-                }) 
+                } ]
+                
             } );
-            for (var i in data.reverse()){
-                graph.series.addData({y: data[i].temperature});
-            };
             
             var hoverDetail = new Rickshaw.Graph.HoverDetail( {
                 graph: graph
@@ -59,14 +52,14 @@
 
             graph.render();
 
-            var intervalID = setInterval(
+            /*var intervalID = setInterval(
                 function(){
                     $.getJSON( "temperature.json?limit=1", function( data ) {
                         var item = {/*x:data[0].timestamp+seconds_offset, */y: data[0].temperature};
                         graph.series.addData(item);
                         graph.render();
                     });
-                }, tv);
+                }, tv); */
 
         });
     </script>
